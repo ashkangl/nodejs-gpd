@@ -5,6 +5,9 @@ import cors from 'cors';
 import { fileURLToPath } from 'url';
 import path from "path";
 
+//
+import mainRoutes from './routes/main.js';
+
 const app = express();
 
 const __filename = fileURLToPath(import.meta.url);
@@ -26,6 +29,8 @@ mongoose.connect("mongodb://0.0.0.0:27017/nodegpd",{
   });
 const connection = mongoose.connection;
 connection.once('open',() =>{ console.log(`db connected`)});
+
+app.use('/api',mainRoutes);
 
 app.listen(8000,(console.log('server started port 8000')))
 
